@@ -26,11 +26,27 @@
 
 
   <!-- setup base links -->
-  <link name="${namespace}/frame_link"/>
-  <joint name="${namespace}/base_frame_joint" type="fixed">
+<!--  <link name="${namespace}/frame_link"/>-->
+<!--  <joint name="${namespace}/frame_joint" type="fixed">-->
+<!--    <parent link="${namespace}/base_link"/>-->
+<!--    <child link="${namespace}/frame_link"/>-->
+<!--    <origin xyz="0 0.0373 -0.15585" rpy="0 0 0"/>-->
+<!--  </joint>-->
+
+  <!-- depth sensor -->
+  <link name="${namespace}/depth_sensor_link"/>
+  <joint name="${namespace}/depth_sensor_joint" type="fixed">
     <parent link="${namespace}/base_link"/>
-    <child link="${namespace}/frame_link"/>
-    <origin xyz="0 0.0373 -0.15585" rpy="0 0 0"/>
+    <child link="${namespace}/depth_sensor_link"/>
+    <origin xyz="0.1 0.1 0" rpy="${2*deg90} 0 0"/>
+  </joint>
+
+  <!-- Realsense T265 -->
+  <link name="t265_pose_frame"/>
+  <joint name="t265_joint" type="fixed">
+    <child link="${namespace}/base_link"/>
+    <parent link="t265_pose_frame"/>
+    <origin xyz="-0.2 0 0" rpy="0 0 ${deg90}"/>
   </joint>
 
   <!-- Joint state publisher plugin -->
